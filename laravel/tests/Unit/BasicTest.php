@@ -10,13 +10,13 @@ class BasicTest extends TestCase
     /**
      * A basic unit test example.
      */
-    public function testExample()
+    public function test_example()
     {
         $user = new User;
         $this->assertInstanceOf(User::class, $user);
     }
 
-    public function testAssert()
+    public function test_assert()
     {
         $user = User::factory()->create(['name' => 'test']);
         $this->assertTrue(is_string($user->email));

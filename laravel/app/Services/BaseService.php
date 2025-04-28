@@ -20,12 +20,14 @@ class BaseService
     {
         $model = $this->find($id);
         $model->update($params);
+
         return $model;
     }
 
     public function delete($id)
     {
         $model = $this->find($id);
+
         return $model ? $model->delete() : true;
     }
 
@@ -35,6 +37,7 @@ class BaseService
         if ($width) {
             $query = $query->with($width);
         }
+
         return $query->find($id);
     }
 
@@ -51,21 +54,24 @@ class BaseService
                 $this->delete($id);
             }
             DB::commit();
+
             return true;
         } catch (\Exception $exception) {
             DB::rollBack();
             Log::debug($exception->getMessage());
+
             return false;
         }
     }
 
     protected function uploadFile($param, $field, $folder)
     {
-        list($extension, $content) = explode('.', $param[$field]);
+        [$extension, $content] = explode('.', $param[$field]);
         $tmpExtension = explode('/', $extension);
-        $fileName = Carbon::now()->timestamp . '.' . $tmpExtension[1];
+        $fileName = Carbon::now()->timestamp.'.'.$tmpExtension[1];
         $content = explode(',', $content[1]);
-        Storage::put('public/' . $folder . '/' . $fileName, base64_decode($content));
+        Storage::put('public/'.$folder.'/'.$fileName, base64_decode($content));
+
         return $fileName;
     }
 }

@@ -11,13 +11,11 @@ class PostController extends BaseController
 {
     /**
      * Summary of service
-     * @var 
      */
     protected $service;
 
     /**
      * Summary of __construct
-     * @param \App\Services\BaseService $service
      */
     public function __construct(BaseService $service)
     {
@@ -26,42 +24,40 @@ class PostController extends BaseController
 
     /**
      * Summary of index
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Database\Eloquent\Collection
      */
     public function index(Request $request): Collection
     {
         return Post::createMany([
             [
-                "title" => "Example Post",
-                "content" => "This is an example post.",
+                'title' => 'Example Post',
+                'content' => 'This is an example post.',
             ],
             [
-                "title" => "Example Post",
-                "content" => "This is an example post 2.",
+                'title' => 'Example Post',
+                'content' => 'This is an example post 2.',
             ],
             [
-                "title" => "Example Post",
-                "content" => "This is an example post 3.",
-            ]
+                'title' => 'Example Post',
+                'content' => 'This is an example post 3.',
+            ],
         ]);
     }
 
     /**
      * Summary of store
-     * @param \Illuminate\Http\Request $request
      */
     public function store(Request $request)
     {
         $params = $request->all();
         $item = $this->service->create($params);
+
         return $this->responseSuccess(compact('item'));
     }
 
     /**
      * Summary of update
-     * @param \Illuminate\Http\Request $request
-     * @param mixed $id
+     *
+     * @param  mixed  $id
      */
     public function update(Request $request, $id)
     {
@@ -70,13 +66,14 @@ class PostController extends BaseController
         if ($item) {
             return $this->responseSuccess();
         }
+
         return $this->responseError('api.code.common.update_failed');
     }
 
     /**
      * Summary of destroy
-     * @param \Illuminate\Http\Request $request
-     * @param mixed $id
+     *
+     * @param  mixed  $id
      */
     public function destroy(Request $request, $id)
     {
@@ -84,6 +81,7 @@ class PostController extends BaseController
         if ($result) {
             return $this->responseSuccess();
         }
+
         return $this->responseError('api.code.common.delete_failed');
     }
 }

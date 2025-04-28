@@ -2,7 +2,6 @@
 
 namespace Repositories;
 
-
 use App\Models\Post;
 use App\Models\User;
 use App\Repositories\PostRepository;
@@ -16,13 +15,13 @@ class PostRepositoryTest extends TestCase
 
     protected $postRepository;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
-        $this->postRepository = new PostRepository();
+        $this->postRepository = new PostRepository;
     }
 
-    public function testCreatePost()
+    public function test_create_post()
     {
         // create data post
         $faker = Factory::create();

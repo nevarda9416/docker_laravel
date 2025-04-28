@@ -11,7 +11,8 @@ use Tests\TestCase;
 class PostTest extends TestCase
 {
     use RefreshDatabase;
-    public function testPostBeLongsToUser()
+
+    public function test_post_be_longs_to_user()
     {
         // Need to create UserFactory and PostFactory before test
         // Use factory to create user and post for test

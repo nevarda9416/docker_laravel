@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 class BaseController extends Controller
 {
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     public function responseError($apiKeyCode, $errors = [], $customData = [])
     {

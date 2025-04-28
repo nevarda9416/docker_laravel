@@ -8,19 +8,17 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Post extends BaseModel
 {
-    use HasFactory, Sluggable; 
+    use HasFactory, Sluggable;
 
     /**
      * The attributes that are mass assignable.
+     *
      * @var string[]
      */
     protected $fillable = [
-        'title', 'slug', 'content', 'user_id'
+        'title', 'slug', 'content', 'user_id',
     ];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -28,8 +26,8 @@ class Post extends BaseModel
 
     /**
      * Summary of setTitleAttribute
-     * @param mixed $value
-     * @return void
+     *
+     * @param  mixed  $value
      */
     public function setTitleAttribute($value): void
     {

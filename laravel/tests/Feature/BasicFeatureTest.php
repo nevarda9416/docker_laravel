@@ -12,23 +12,21 @@ class BasicFeatureTest extends TestCase
 
     /**
      * A basic feature test example.
-     *
-     * @return void
      */
-    public function testExample(): void
+    public function test_example(): void
     {
         $response = $this->get('/');
         $response->assertStatus(200);
     }
 
-    public function testUserCanViewLogin(): void
+    public function test_user_can_view_login(): void
     {
         $response = $this->get('/login');
         $response->assertStatus(200);
         $response->assertViewIs('auth.login')->assertSee('Login');
     }
 
-    public function testUserCanLogin(): void
+    public function test_user_can_login(): void
     {
         $this->assertGuest();
         $user = User::factory()->create([
@@ -43,7 +41,7 @@ class BasicFeatureTest extends TestCase
         $this->assertAuthenticatedAs($user);
     }
 
-    public function testUserCannotLoginWithIncorrectPassword(): void
+    public function test_user_cannot_login_with_incorrect_password(): void
     {
         $user = User::factory()->create([
             'password' => bcrypt('laravel'),
@@ -59,14 +57,14 @@ class BasicFeatureTest extends TestCase
         $this->assertGuest();
     }
 
-    public function testUserCanViewRegister(): void
+    public function test_user_can_view_register(): void
     {
         $response = $this->get('/register');
         $response->assertStatus(200);
         $response->assertViewIs('auth.register')->assertSee('register');
     }
 
-    public function testUserCanRegister(): void
+    public function test_user_can_register(): void
     {
         $this->assertGuest();
         $user = User::factory()->create();
