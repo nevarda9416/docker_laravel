@@ -2,27 +2,68 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\Api\PostService;
-use App\Http\Requests\Api\PostCreateRequest;
+use App\Models\Post;
+use App\Services\BaseService;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
 class PostController extends BaseController
 {
+    /**
+     * Summary of service
+     * @var 
+     */
     protected $service;
 
-    public function __construct(PostService $service)
+    /**
+     * Summary of __construct
+     * @param \App\Services\BaseService $service
+     */
+    public function __construct(BaseService $service)
     {
         $this->service = $service;
     }
 
-    public function store(PostCreateRequest $request)
+    /**
+     * Summary of index
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function index(Request $request): Collection
+    {
+        return Post::createMany([
+            [
+                "title" => "Example Post",
+                "content" => "This is an example post.",
+            ],
+            [
+                "title" => "Example Post",
+                "content" => "This is an example post 2.",
+            ],
+            [
+                "title" => "Example Post",
+                "content" => "This is an example post 3.",
+            ]
+        ]);
+    }
+
+    /**
+     * Summary of store
+     * @param \Illuminate\Http\Request $request
+     */
+    public function store(Request $request)
     {
         $params = $request->all();
         $item = $this->service->create($params);
         return $this->responseSuccess(compact('item'));
     }
 
-    public function update(PostCreateRequest $request, $id)
+    /**
+     * Summary of update
+     * @param \Illuminate\Http\Request $request
+     * @param mixed $id
+     */
+    public function update(Request $request, $id)
     {
         $params = $request->all();
         $item = $this->service->update($id, $params);
@@ -32,6 +73,11 @@ class PostController extends BaseController
         return $this->responseError('api.code.common.update_failed');
     }
 
+    /**
+     * Summary of destroy
+     * @param \Illuminate\Http\Request $request
+     * @param mixed $id
+     */
     public function destroy(Request $request, $id)
     {
         $result = $this->service->delete($id);

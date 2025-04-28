@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('title'); // Title of the post
+            $table->string('slug'); // Slug of the post
             $table->text('content'); // Content of the post
             $table->string('author')->nullable(); // Author of the post (optional)
             $table->integer('user_id')->nullable();
